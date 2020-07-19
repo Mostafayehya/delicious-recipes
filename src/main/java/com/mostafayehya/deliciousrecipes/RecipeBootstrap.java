@@ -4,14 +4,17 @@ import com.mostafayehya.deliciousrecipes.domain.*;
 import com.mostafayehya.deliciousrecipes.repositories.CategoriesRepository;
 import com.mostafayehya.deliciousrecipes.repositories.RecipeRepository;
 import com.mostafayehya.deliciousrecipes.repositories.UnitOfMeasureRepository;
-import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.ApplicationListener;
+import org.springframework.context.event.ContextRefreshedEvent;
+import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class RecipeBootstrap implements CommandLineRunner {
+@Component
+public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEvent> {
 
     private final CategoriesRepository categoryRepository;
 
@@ -30,10 +33,10 @@ public class RecipeBootstrap implements CommandLineRunner {
 
     }
 
-
     @Override
-    public void run(String... args) throws Exception {
+    public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
         recipeRepository.saveAll(getRecipes());
+
     }
 
     private List<Recipe> getRecipes() {
