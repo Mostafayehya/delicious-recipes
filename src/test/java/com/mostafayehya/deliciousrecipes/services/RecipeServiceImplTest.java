@@ -11,7 +11,7 @@ import org.mockito.MockitoAnnotations;
 import java.util.HashSet;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 class RecipeServiceImplTest {
 
@@ -36,5 +36,8 @@ class RecipeServiceImplTest {
         when(recipeRepository.findAll()).thenReturn(recipes);
 
         assertEquals(recipeServiceImpl.getRecipes().size(),1);
+
+        // Good way to verify the interactions between objects
+        verify(recipeRepository,times(1)).findAll();
     }
 }
