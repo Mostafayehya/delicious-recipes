@@ -9,6 +9,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import java.util.HashSet;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -39,5 +40,22 @@ class RecipeServiceImplTest {
 
         // Good way to verify the interactions between objects
         verify(recipeRepository,times(1)).findAll();
+    }
+
+    @Test
+    void getRecipeByIdTest() throws Exception{
+
+        // given
+        Recipe recipe = new Recipe();
+        recipe.setId(1L);
+        Optional<Recipe> optionalRecipe = Optional.of(recipe);
+
+        // when
+        when(recipeRepository.findById(any())).thenReturn(optionalRecipe);
+        Recipe recipeReturend = recipeServiceImpl.findById(1L);
+
+        // then
+        assertNotNull(recipeReturend);
+        verify(recipeRepository,times(1)).findById(anyLong());
     }
 }
