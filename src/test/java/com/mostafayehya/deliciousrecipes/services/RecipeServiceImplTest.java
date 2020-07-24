@@ -1,8 +1,9 @@
 package com.mostafayehya.deliciousrecipes.services;
 
+import com.mostafayehya.deliciousrecipes.converters.RecipeCommandToRecipe;
+import com.mostafayehya.deliciousrecipes.converters.RecipeToRecipeCommand;
 import com.mostafayehya.deliciousrecipes.domain.Recipe;
 import com.mostafayehya.deliciousrecipes.repositories.RecipeRepository;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -21,10 +22,16 @@ class RecipeServiceImplTest {
     @Mock
     private RecipeRepository recipeRepository;
 
+    @Mock
+    RecipeToRecipeCommand recipeToRecipeCommand;
+
+    @Mock
+    RecipeCommandToRecipe recipeCommandToRecipe;
+
     @BeforeEach
     void setUp() {
         MockitoAnnotations.initMocks(this);
-        recipeServiceImpl = new RecipeServiceImpl(recipeRepository);
+        recipeServiceImpl = new RecipeServiceImpl(recipeRepository, recipeToRecipeCommand, recipeCommandToRecipe);
     }
 
     @Test

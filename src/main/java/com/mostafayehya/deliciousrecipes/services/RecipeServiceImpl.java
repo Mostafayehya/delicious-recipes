@@ -1,10 +1,14 @@
 package com.mostafayehya.deliciousrecipes.services;
 
+import com.mostafayehya.deliciousrecipes.comands.RecipeCommand;
+import com.mostafayehya.deliciousrecipes.converters.RecipeCommandToRecipe;
+import com.mostafayehya.deliciousrecipes.converters.RecipeToRecipeCommand;
 import com.mostafayehya.deliciousrecipes.domain.Recipe;
 import com.mostafayehya.deliciousrecipes.repositories.RecipeRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
@@ -14,9 +18,13 @@ import java.util.Set;
 public class RecipeServiceImpl implements RecipeService {
 
     private final RecipeRepository recipeRepository;
+    private final RecipeToRecipeCommand recipeToRecipeCommand;
+    private final RecipeCommandToRecipe recipeCommandToRecipe;
 
-    public RecipeServiceImpl(RecipeRepository recipeRepository) {
+    public RecipeServiceImpl(RecipeRepository recipeRepository, RecipeToRecipeCommand recipeToRecipeCommand, RecipeCommandToRecipe recipeCommandToRecipe) {
         this.recipeRepository = recipeRepository;
+        this.recipeToRecipeCommand = recipeToRecipeCommand;
+        this.recipeCommandToRecipe = recipeCommandToRecipe;
     }
 
     @Override
@@ -39,5 +47,15 @@ public class RecipeServiceImpl implements RecipeService {
 
 
         return optionalRecipe.get();
+    }
+
+    @Transactional // I need to know why we used this
+    @Override
+    public RecipeCommand saveRecipecommand(RecipeCommand recipeCommand) {
+
+        Recipe recipe = recipeCommandToRecipe.convert(recipeCommand);
+        Recipe returnedRecipe =recipeRepository.save(recipe);
+
+        return recipeToRecipeCommand.convert(returnedRecipe);
     }
 }
