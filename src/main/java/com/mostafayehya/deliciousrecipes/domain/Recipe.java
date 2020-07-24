@@ -41,8 +41,10 @@ public class Recipe {
     }
 
     public void setNotes(Note notes){
-        this.note=notes;
-        notes.setRecipe(this);
+        if (notes != null) {
+            this.note = notes;
+            notes.setRecipe(this);
+        }
     }
 
     public Recipe addIngredient(Ingredient ingredient){
