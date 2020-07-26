@@ -34,7 +34,7 @@ public class RecipeController {
 
         RecipeCommand savedRecipeCommand = recipeService.saveRecipeCommand(recipeCommand);
 
-        return "redirect:/recipe/show/" + savedRecipeCommand.getId();
+        return "redirect:/recipe/"+ savedRecipeCommand.getId().toString() + "/show";
 
     }
 
