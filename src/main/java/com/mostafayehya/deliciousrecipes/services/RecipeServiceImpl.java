@@ -39,7 +39,7 @@ public class RecipeServiceImpl implements RecipeService {
     @Override
     public Recipe findById(Long id) {
 
-        Optional<Recipe> optionalRecipe =recipeRepository.findById(id);
+        Optional<Recipe> optionalRecipe = recipeRepository.findById(id);
 
         //todo redirect user to the error page instead
         if (!optionalRecipe.isPresent())
@@ -51,11 +51,17 @@ public class RecipeServiceImpl implements RecipeService {
 
     @Transactional // I need to know why we used this
     @Override
-    public RecipeCommand saveRecipecommand(RecipeCommand recipeCommand) {
+    public RecipeCommand saveRecipeCommand(RecipeCommand recipeCommand) {
 
         Recipe recipe = recipeCommandToRecipe.convert(recipeCommand);
-        Recipe returnedRecipe =recipeRepository.save(recipe);
-
+        Recipe returnedRecipe = recipeRepository.save(recipe);
+        log.debug("Saved Recipe Id " + returnedRecipe.getId());
         return recipeToRecipeCommand.convert(returnedRecipe);
+    }
+
+    @Transactional
+    @Override
+    public RecipeCommand findRecipeCommandById(Long id) {
+        return recipeToRecipeCommand.convert(findById(id));
     }
 }

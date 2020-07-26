@@ -13,7 +13,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.transaction.Transactional;
-import java.util.Set;
 
 import static org.junit.Assert.*;
 
@@ -51,7 +50,7 @@ public class RecipeServiceIT {
 
         // when
         recipeCommand.setDescription(DESCRIPTION);
-        RecipeCommand savedRecipeCommand = recipeService.saveRecipecommand(recipeCommand);
+        RecipeCommand savedRecipeCommand = recipeService.saveRecipeCommand(recipeCommand);
 
         // then
         assertEquals(DESCRIPTION,savedRecipeCommand.getDescription());

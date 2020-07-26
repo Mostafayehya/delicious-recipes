@@ -21,6 +21,8 @@
             th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"></script>
 </head>
 <body>
+<!--/*@thymesVar id="recipes" type="java.util.List  "*/-->
+<!-- @thymesVar id="recipe" type="com.mostafayehya.deliciousrecipes.domain.Recipe"-->
 
 <div class="container-fluid" style="margin-top: 20px">
     <div class="row">
@@ -41,7 +43,7 @@
                             </tr>
                             </thead>
                             <tr th:remove="all">
-                                <td >123</td>
+                                <td>123</td>
                                 <td>Tasty Goodnees 1</td>
                             </tr>
                             <tr th:remove="all">
@@ -49,10 +51,9 @@
                                 <td>Tasty Goodnees 2</td>
                             </tr>
                             <tr th:each="recipe : ${recipes}">
-                        <!-- @thymesVar id="recipe" type="com.mostafayehya.deliciousrecipes.domain.Recipe"-->
                                 <td th:text="${recipe.id}">334</td>
                                 <td th:text="${recipe.description}">Tasty Goodnees 3</td>
-                                <td><a href="#" th:href="@{'/recipe/show/' + ${recipe.id}}">View</a></td>
+                                <td><a href="#" th:href="@{'/recipe/' + ${recipe.id}+'/show'}">View</a></td>
                             </tr>
                         </table>
                     </div>
