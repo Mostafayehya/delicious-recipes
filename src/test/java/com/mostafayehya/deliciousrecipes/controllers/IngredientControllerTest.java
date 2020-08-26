@@ -14,6 +14,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
@@ -25,6 +26,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 
@@ -95,10 +97,27 @@ class IngredientControllerTest {
                 // then
                 .andExpect(status().isOk())
                 .andExpect(view().name("recipe/ingredient/ingredientform"))
-                .andExpect(model().attributeExists("uomList","ingredient"));
+                .andExpect(model().attributeExists("uomList", "ingredient"));
     }
 
     @Test
     void saveOrUpdateTest() throws Exception {
+
+        // given
+        IngredientCommand ingredientCommand = new IngredientCommand();
+        ingredientCommand.setId(2L);
+        ingredientCommand.setRecipeId(1L);
+
+        when(ingredientService.saveIngredientCommand(any())).thenReturn(ingredientCommand);
+
+        // when
+        mockMvc.perform(post("/recipe/1/ingredients/")
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                .param("id", "")
+                .param("description", "some test")
+        )
+                // then
+                .andExpect(status().is3xxRedirection())
+                .andExpect(view().name("redirect:/recipe/1/ingredients/2/show"));
     }
 }
