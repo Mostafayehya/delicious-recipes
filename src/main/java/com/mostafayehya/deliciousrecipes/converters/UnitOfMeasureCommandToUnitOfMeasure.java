@@ -19,7 +19,8 @@ public class UnitOfMeasureCommandToUnitOfMeasure implements Converter<UnitOfMeas
 
         UnitOfMeasure uom = new UnitOfMeasure();
         uom.setId(source.getId());
-        uom.setUom(source.getUom());
+        uom.setName(source.getName());
+
         return uom;
     }
 }

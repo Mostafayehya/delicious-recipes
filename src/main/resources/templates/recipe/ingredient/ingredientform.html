@@ -34,7 +34,7 @@
             <!--/*@thymesVar id="ingredient" type="com.mostafayehya.deliciousrecipes.comands.IngredientCommand"*/-->
             <!--/*@thymesVar id="uomEach"    type="com.mostafayehya.deliciousrecipes.comands.UnitOfMeasureCommand"*/-->
 
-            <form  th:object="${ingredient}" th:action="@{'/recipe/' + ${ingredient.id} + '/ingredients'} " method="post">
+            <form  th:object="${ingredient}" th:action="@{'/recipe/' + ${ingredient.recipeId} + '/ingredients'} " method="post">
                 <input type="hidden" th:field="*{id}"/>
                 <div class="pannel-group">
                     <div class="panel panel-primary">
@@ -54,12 +54,14 @@
                                 </div>
                                 <div class="col-md-3 form-group">
                                     <label>UOM:</label>
-                                    <select class="form-control" name="uom.id">
+
+                                    <select class="form-control" name="unitOfMeasure.id">
                                         <option th:each="uomEach : ${uomList}"
                                                 th:value="${uomEach.id}"
                                                 th:selected="${uomEach.id.equals(ingredient.unitOfMeasure.id)}"
-                                                th:text="${uomEach.uom}">Each</option>
+                                                th:text="${uomEach.name}">Each</option>
                                     </select>
+
                                 </div>
                             </div>
                         </div>

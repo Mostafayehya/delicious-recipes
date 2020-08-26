@@ -115,7 +115,7 @@
                                     <li th:remove="all">1 Cup of milk</li>
                                     <li th:remove="all">1 Teaspoon of chocolate</li>
                                     <li th:each="ingredient :${recipe.ingredients}"
-                                        th:text="${(ingredient.amount +' '+ ingredient.uom.uom +' - '+ ingredient.description)}">1 Teaspoon of Sugar</li>
+                                        th:text="${(ingredient.amount +' '+ ingredient.uom.name +' - '+ ingredient.description)}">1 Teaspoon of Sugar</li>
                                 </ul>
                             </div>
                         </div>

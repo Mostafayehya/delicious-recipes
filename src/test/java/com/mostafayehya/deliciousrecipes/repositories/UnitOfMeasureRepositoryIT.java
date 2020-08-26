@@ -18,17 +18,17 @@ public class UnitOfMeasureRepositoryIT {
     UnitOfMeasureRepository unitOfMeasureRepository;
 
     @Test
-    public void findByUom() {
+    public void findByName() {
 
-        Optional<UnitOfMeasure> optionalUnitOfMeasure = unitOfMeasureRepository.findByUom("Teaspoon");
+        Optional<UnitOfMeasure> optionalUnitOfMeasure = unitOfMeasureRepository.findByName("Teaspoon");
 
-        assertEquals("Teaspoon",optionalUnitOfMeasure.get().getUom());
+        assertEquals("Teaspoon",optionalUnitOfMeasure.get().getName());
     }
     @Test
-    public void findByUomCup() {
+    public void findByNameCup() {
 
-        Optional<UnitOfMeasure> optionalUnitOfMeasure = unitOfMeasureRepository.findByUom("Cup");
+        Optional<UnitOfMeasure> optionalUnitOfMeasure = unitOfMeasureRepository.findByName("Cup");
 
-        assertEquals("Cup",optionalUnitOfMeasure.get().getUom());
+        assertEquals("Cup",optionalUnitOfMeasure.get().getName());
     }
 }

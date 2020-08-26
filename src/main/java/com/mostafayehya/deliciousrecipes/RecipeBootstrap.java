@@ -50,7 +50,7 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
 
         //get UOMs
 
-        Optional<UnitOfMeasure> eachUomOptional = unitOfMeasureRepository.findByUom("Each");
+        Optional<UnitOfMeasure> eachUomOptional = unitOfMeasureRepository.findByName("Each");
 
 
         if (!eachUomOptional.isPresent()) {
@@ -60,7 +60,7 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
         }
 
 
-        Optional<UnitOfMeasure> tableSpoonUomOptional = unitOfMeasureRepository.findByUom("Tablespoon");
+        Optional<UnitOfMeasure> tableSpoonUomOptional = unitOfMeasureRepository.findByName("Tablespoon");
 
 
         if (!tableSpoonUomOptional.isPresent()) {
@@ -70,7 +70,7 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
         }
 
 
-        Optional<UnitOfMeasure> teaSpoonUomOptional = unitOfMeasureRepository.findByUom("Teaspoon");
+        Optional<UnitOfMeasure> teaSpoonUomOptional = unitOfMeasureRepository.findByName("Teaspoon");
 
 
         if (!teaSpoonUomOptional.isPresent()) {
@@ -80,7 +80,7 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
         }
 
 
-        Optional<UnitOfMeasure> dashUomOptional = unitOfMeasureRepository.findByUom("Dash");
+        Optional<UnitOfMeasure> dashUomOptional = unitOfMeasureRepository.findByName("Dash");
 
 
         if (!dashUomOptional.isPresent()) {
@@ -90,7 +90,7 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
         }
 
 
-        Optional<UnitOfMeasure> pintUomOptional = unitOfMeasureRepository.findByUom("Pint");
+        Optional<UnitOfMeasure> pintUomOptional = unitOfMeasureRepository.findByName("Pint");
 
 
         if (!pintUomOptional.isPresent()) {
@@ -100,7 +100,7 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
         }
 
 
-        Optional<UnitOfMeasure> cupsUomOptional = unitOfMeasureRepository.findByUom("Cup");
+        Optional<UnitOfMeasure> cupsUomOptional = unitOfMeasureRepository.findByName("Cup");
 
 
         if (!cupsUomOptional.isPresent()) {

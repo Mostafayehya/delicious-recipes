@@ -11,5 +11,5 @@ public class UnitOfMeasureCommand {
 
     private Long id;
 
-    private String uom;
+    private String name;
 }

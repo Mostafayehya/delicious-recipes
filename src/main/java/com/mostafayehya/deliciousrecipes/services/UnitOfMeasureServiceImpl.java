@@ -15,18 +15,18 @@ import java.util.stream.StreamSupport;
 public class UnitOfMeasureServiceImpl implements UnitOfMeasureService {
 
     private final UnitOfMeasureRepository unitOfMeasureRepository;
-    private final UnitOfMeasureToUnitOfMeasureCommand converter;
+    private final UnitOfMeasureToUnitOfMeasureCommand unitOfMeasureToUnitOfMeasureCommand;
 
     public UnitOfMeasureServiceImpl(UnitOfMeasureRepository unitOfMeasureRepository, UnitOfMeasureToUnitOfMeasureCommand converter) {
         this.unitOfMeasureRepository = unitOfMeasureRepository;
-        this.converter = converter;
+        this.unitOfMeasureToUnitOfMeasureCommand = converter;
     }
 
     @Override
     public Set<UnitOfMeasureCommand> listAllUoms() {
 
         return StreamSupport.stream(unitOfMeasureRepository.findAll().spliterator(), false)
-                .map(converter::convert)
+                .map(unitOfMeasureToUnitOfMeasureCommand::convert)
                 .collect(Collectors.toSet());
     }
 }
