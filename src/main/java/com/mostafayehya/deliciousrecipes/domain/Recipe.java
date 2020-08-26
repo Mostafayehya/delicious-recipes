@@ -213,7 +213,7 @@ public class Recipe {
 
 
     public String toString() {
-        return "Recipe(id=" + this.getId() + ", description=" + this.getDescription() + ", cookTime=" + this.getCookTime() + ", prepTime=" + this.getPrepTime() + ", servings=" + this.getServings() + ", sources=" + this.getSources() + ", url=" + this.getUrl() + ", directions=" + this.getDirections() + ", difficulty=" + this.getDifficulty() + ", image=" + java.util.Arrays.deepToString(this.getImage()) + ", note=" + this.getNote() + ", ingredients=" + this.getIngredients() + ", categories=" + this.getCategories() + ")";
+        return "Recipe(id=" + this.getId() + ", description=" + this.getDescription() + ", cookTime=" + this.getCookTime() + ", prepTime=" + this.getPrepTime() + ", servings=" + this.getServings() + ", sources=" + this.getSources() + ", url=" + this.getUrl() + ", directions=" +  ", difficulty=" + this.getDifficulty() + ", note=" + this.getNote()  + ")";
     }
 }
 
