@@ -4,7 +4,9 @@ import com.mostafayehya.deliciousrecipes.comands.IngredientCommand;
 import com.mostafayehya.deliciousrecipes.comands.RecipeCommand;
 import com.mostafayehya.deliciousrecipes.domain.Ingredient;
 import com.mostafayehya.deliciousrecipes.domain.Recipe;
+import com.mostafayehya.deliciousrecipes.services.IngredientService;
 import com.mostafayehya.deliciousrecipes.services.RecipeService;
+import com.mostafayehya.deliciousrecipes.services.UnitOfMeasureService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -32,6 +34,12 @@ class IngredientControllerTest {
     @Mock
     RecipeService recipeService;
 
+    @Mock
+    IngredientService ingredientService;
+
+    @Mock
+    UnitOfMeasureService unitOfMeasureService;
+
     @InjectMocks
     IngredientController ingredientController;
 
@@ -47,16 +55,50 @@ class IngredientControllerTest {
 
         // given
         RecipeCommand recipeCommand = new RecipeCommand();
-
-        // when
         when(recipeService.findRecipeCommandById(anyLong())).thenReturn(recipeCommand);
 
-
+        // when
         mockMvc.perform(get("/recipe/1/ingredients"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("recipe/ingredient/list"))
                 .andExpect(model().attributeExists("recipe"));
 
-        verify(recipeService,times(1)).findRecipeCommandById(anyLong());
+        // then
+        verify(recipeService, times(1)).findRecipeCommandById(anyLong());
+    }
+
+    @Test
+    void showRecipeIngredientTest() throws Exception {
+
+        // given
+        IngredientCommand ingredientCommand = new IngredientCommand();
+        when(ingredientService.findByRecipeIdAndIngredientID(anyLong(), anyLong())).thenReturn(ingredientCommand);
+
+        // when
+        mockMvc.perform(get("/recipe/1/ingredients/2/show"))
+                // then
+                .andExpect(status().isOk())
+                .andExpect(view().name("recipe/ingredient/show"))
+                .andExpect(model().attributeExists("ingredient"));
+    }
+
+    @Test
+    void updateRecipeIngredientTest() throws Exception {
+
+        // given
+        IngredientCommand ingredientCommand = new IngredientCommand();
+        when(ingredientService.findByRecipeIdAndIngredientID(anyLong(), anyLong())).thenReturn(ingredientCommand);
+        when(unitOfMeasureService.listAllUoms()).thenReturn(new HashSet<>());
+
+        // when
+        mockMvc.perform(get("/recipe/1/ingredients/2/update"))
+                // then
+                .andExpect(status().isOk())
+                .andExpect(view().name("recipe/ingredient/ingredientform"))
+                .andExpect(model().attributeExists("uomList","ingredient"));
+    }
+
+    @Test
+    void saveOrUpdateTest() throws Exception {
     }
 }
