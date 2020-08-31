@@ -120,4 +120,20 @@ class IngredientControllerTest {
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/recipe/1/ingredients/2/show"));
     }
+
+    @Test
+    void newIngredientFormTest() throws Exception{
+        // given
+        RecipeCommand recipeCommand = new RecipeCommand();
+        recipeCommand.setId(1l);
+
+        when(unitOfMeasureService.listAllUoms()).thenReturn(new HashSet<>());
+        // when
+        mockMvc.perform(get("/recipe/1/ingredients/new"))
+                // then
+                .andExpect(status().isOk())
+                .andExpect(model().attributeExists("ingredient","uomList"))
+                .andExpect(view().name("recipe/ingredient/ingredientform"));
+
+    }
 }
